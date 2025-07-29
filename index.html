@@ -1,129 +1,96 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Calculadora de peso</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
       background: linear-gradient(135deg, #a8edea, #fed6e3);
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 20px;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      min-height: 100vh;
     }
-
     .container {
-      background-color: white;
-      padding: 25px 20px;
+      background: white;
+      padding: 2rem;
       border-radius: 15px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      width: 100%;
       max-width: 400px;
+      width: 100%;
       text-align: center;
       animation: fadeIn 0.8s ease;
+      flex-grow: 1;
     }
-
-    h2 {
-      color: #333;
-      margin-bottom: 20px;
-      font-size: 1.6rem;
-    }
-
-    label {
-      display: block;
-      text-align: left;
-      font-weight: bold;
-      margin-top: 10px;
-      color: #444;
-      font-size: 1rem;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-top: 5px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      outline: none;
-      transition: border-color 0.3s ease;
-    }
-
-    input:focus {
-      border-color: #0077ff;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 14px;
-      background-color: #0077ff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      width: 100%;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #005fd1;
-    }
-
-    #resultado {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: 500;
-      color: #2c2c2c;
-    }
-
-    #imagen {
-      display: none;
-      margin-top: 20px;
-      width: 70px;
-      animation: bounce 0.6s;
-    }
-
     #musica {
       display: none;
     }
-
+    #alerta {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      border-radius: 0.375rem;
+      text-align: center;
+      font-weight: 600;
+    }
+    footer {
+      margin-top: 15px;
+      padding: 10px 0;
+      text-align: center;
+      color: #555;
+      font-weight: 500;
+    }
     @keyframes fadeIn {
       from {opacity: 0; transform: translateY(-20px);}
       to {opacity: 1; transform: translateY(0);}
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h2>📱 Calculadora de peso</h2>
-    <label for="nombre">Ingresa tu nombre:</label>
-    <input type="text" id="nombre" placeholder="Ej: Alejandro">
+    <h2 class="mb-4">📱 Calculadora de peso</h2>
 
-    <label for="peso">Ingresa tu peso (kg):</label>
-    <input type="number" id="peso" placeholder="Ej: 70">
+    <label for="nombre" class="form-label text-start d-block fw-bold">Ingresa tu nombre:</label>
+    <input type="text" id="nombre" class="form-control mb-3" placeholder="Ej: Alejandro" />
 
-    <button onclick="mostrarAlReves()">Enviar</button>
+    <label for="peso" class="form-label text-start d-block fw-bold">Ingresa tu peso (kg):</label>
+    <input type="number" id="peso" class="form-control mb-3" placeholder="Ej: 70" />
 
-    <p id="resultado"></p>
-    <img id="imagen" src="https://w7.pngwing.com/pngs/778/387/png-transparent-smiley-thumb-signal-emoticon-smiley-miscellaneous-face-smiley.png" alt="Smiley" />
+    <button onclick="mostrarAlReves()" class="btn btn-primary w-100 mb-3">Enviar</button>
+
+    <p id="resultado" class="fs-5 fw-semibold"></p>
+
+    <img id="gif" src="https://i.pinimg.com/originals/e5/49/b1/e549b1e2cb82f0b15f69eb6f57ba7581.gif" alt="GIF divertido" class="img-fluid mb-3 d-none rounded" />
+    <img id="emoji" src="https://w7.pngwing.com/pngs/778/387/png-transparent-smiley-thumb-signal-emoticon-smiley-miscellaneous-face-smiley.png" alt="Smiley pulgar arriba" class="img-fluid mb-3 d-none rounded" />
+
+    <div id="alerta" class="alert alert-danger" role="alert">
+      ⚠️ Ojo con los bizcochitos!!
+    </div>
+
     <div id="musica"></div>
   </div>
+
+  <footer>
+    Página creada por la doble P
+  </footer>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
     function mostrarAlReves() {
@@ -131,17 +98,26 @@
       const peso = document.getElementById('peso').value;
 
       const resultado = document.getElementById('resultado');
-      resultado.textContent = `Hola ${peso} kg tu peso es: ${nombre}. Aprendan a programar. Firma: la doble P`;
-
-      const imagen = document.getElementById('imagen');
-      imagen.style.display = 'block';
-
+      const gif = document.getElementById('gif');
+      const emoji = document.getElementById('emoji');
       const musica = document.getElementById('musica');
+      const alerta = document.getElementById('alerta');
+
+      resultado.textContent = `Hola ${peso} kg tu peso es: ${nombre}`;
+      gif.classList.remove('d-none');
+      emoji.classList.remove('d-none');
+
       musica.innerHTML = `
-        <iframe width="0" height="0" 
-          src="https://www.youtube.com/embed/qSTFZltY3xU?autoplay=1&start=49"
+        <iframe width="0" height="0"
+          src="https://www.youtube.com/embed/uXce8JsavFo?autoplay=1&start=50"
           frameborder="0" allow="autoplay"></iframe>
       `;
+
+      alerta.style.display = 'none';
+
+      setTimeout(() => {
+        alerta.style.display = 'block';
+      }, 3000);
     }
   </script>
 
