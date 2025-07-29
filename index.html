@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de peso</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: white;
+      padding: 25px 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      font-weight: bold;
+      margin-top: 10px;
+      color: #444;
+      font-size: 1rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #0077ff;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 14px;
+      background-color: #0077ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005fd1;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: 500;
+      color: #2c2c2c;
+    }
+
+    #imagen {
+      display: none;
+      margin-top: 20px;
+      width: 70px;
+      animation: bounce 0.6s;
+    }
+
+    #musica {
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>📱 Calculadora de peso</h2>
+    <label for="nombre">Ingresa tu nombre:</label>
+    <input type="text" id="nombre" placeholder="Ej: Alejandro">
+
+    <label for="peso">Ingresa tu peso (kg):</label>
+    <input type="number" id="peso" placeholder="Ej: 70">
+
+    <button onclick="mostrarAlReves()">Enviar</button>
+
+    <p id="resultado"></p>
+    <img id="imagen" src="https://w7.pngwing.com/pngs/778/387/png-transparent-smiley-thumb-signal-emoticon-smiley-miscellaneous-face-smiley.png" alt="Smiley" />
+    <div id="musica"></div>
+  </div>
+
+  <script>
+    function mostrarAlReves() {
+      const nombre = document.getElementById('nombre').value;
+      const peso = document.getElementById('peso').value;
+
+      const resultado = document.getElementById('resultado');
+      resultado.textContent = `Hola ${peso} kg tu peso es: ${nombre}. Aprendan a programar. Firma: la doble P`;
+
+      const imagen = document.getElementById('imagen');
+      imagen.style.display = 'block';
+
+      const musica = document.getElementById('musica');
+      musica.innerHTML = `
+        <iframe width="0" height="0" 
+          src="https://www.youtube.com/embed/qSTFZltY3xU?autoplay=1&start=49"
+          frameborder="0" allow="autoplay"></iframe>
+      `;
+    }
+  </script>
+
+</body>
+</html>
